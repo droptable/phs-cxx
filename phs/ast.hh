@@ -15,7 +15,27 @@ namespace phs {
     typedef std::vector<Token*> mods;
 
     // node-kinds
-    enum Kind {};
+    enum class Kind 
+	  {
+		  UNIT, MODULE, CONTENT,
+      DECL, USE_DECL, USE_ITEM,
+      CLASS_DECL, TRAIT_DECL, IFACE_DECL,
+      FN_DECL, VAR_DECL, VAR_LIST, VAR_ITEM,
+      STMT, BLOCK, BLOCK_STMT = BLOCK,
+      DO_STMT, IF_STMT, FOR_STMT, FOR_IN_STMT,
+      TRY_STMT, GOTO_STMT, TEST_STMT,
+      BREAK_STMT, CONTINUE_STMT,
+      THROW_STMT, WHILE_STMT, ASSERT_STMT,
+      SWITCH_STMT, CASE_ITEM,
+      RETURN_STMT, EXPR_STMT,
+      EXPR, UNARY_EXPR, BINARY_EXPR,
+      COND_EXPR, ASSIGN_EXPR, CAST_EXPR, CHECK_EXPR,
+      RXP_LIT, STR_LIT, ARR_LIT, TUP_LIT,
+      OBJ_LIT, OBJ_PAIR,
+      FN_EXPR, NEW_EXPR, DEL_EXPR,
+      PAREN_EXPR, YIELD_EXPR,
+      NAME, IDENT
+	  };
 
     struct Node 
     {
@@ -72,7 +92,7 @@ namespace phs {
 
     // expressions
     struct Expr : public Node {};
-
+    
     struct UnaryExpr : public Expr {};
     struct BinaryExpr : public Expr {};
     struct CondExpr : public Expr {};
