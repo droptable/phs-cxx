@@ -16,8 +16,8 @@ namespace phs {
 
     // node-kinds
     enum class Kind 
-	  {
-		  UNIT, MODULE, CONTENT,
+    {
+      UNIT, MODULE, CONTENT,
       DECL, USE_DECL, USE_ITEM,
       CLASS_DECL, TRAIT_DECL, IFACE_DECL,
       FN_DECL, VAR_DECL, VAR_LIST, VAR_ITEM,
@@ -35,7 +35,7 @@ namespace phs {
       FN_EXPR, NEW_EXPR, DEL_EXPR,
       PAREN_EXPR, YIELD_EXPR,
       NAME, IDENT
-	  };
+    };
 
     struct Node 
     {
