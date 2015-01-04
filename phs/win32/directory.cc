@@ -16,7 +16,8 @@ PathList& Directory::get_files(const std::string& path)
 
   do {
     if(!(find_data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
-      files.push_back(find_data.cFileName);
+      std::string abs_path = path + Directory::PathSeparator + std::string(find_data.cFileName);
+      files.push_back(abs_path);
   } while(0 != FindNextFile(find_handle, &find_data));
 
   FindClose(find_handle);
