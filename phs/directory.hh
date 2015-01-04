@@ -1,25 +1,26 @@
 #ifndef _PHS_DIRECTORY_H
 #define _PHS_DIRECTORY_H
 
-#include <list>
-#include <string>
+#include "os.hh"
 
-#if !defined(__WIN32__) || !defined(__gnu_linux__) || !defined(__linux__) || !defined(__APPLE__) || !defined(__MACH__)
+#ifdef OS_UNKNOWN
 # error "not implemented yet"
 #endif
 
+#include <list>
+#include <string>
+
 using PathList = std::list<std::string>;
 
-class Directory {
-
-#ifdef __WIN32__
-  const char PathSeparator = '\\';
-#else defined(__gnu_linux__) || defined(__linux__) || defined(__APPLE__) || defined(__MACH__)
-  const char PathSeparator = '/';
+#ifdef OS_WINDOWS
+const char PathSeparator = '\\';
+#elif defined(OS_NIX)
+const char PathSeparator = '/';
 #endif
 
-  static PathList get_files(const std::string& path);
-
+class Directory {
+  public:
+    static PathList get_files(const std::string& path);
 } /* class Directory */;
 
 #endif
