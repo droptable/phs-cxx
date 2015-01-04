@@ -23,7 +23,7 @@ namespace phs {
     uint line = 0;
     uint coln = 0;
 
-    TokenPtr tok;
+    TokenUPtr tok;
     TokenPtr eof;
 
     //         v-  true  -> create a token,
@@ -43,11 +43,9 @@ namespace phs {
     Lexer(Source&);
     ~Lexer();
 
-    void skip(int = 1);
-    void push(TokenPtr);
+    void skip(int n = 1);
 
-    TokenPtr peek();
-    std::list<TokenPtr> peek(int = 2);
+    TokenUPtr& peek(int i = 1);
     TokenPtr next();
   };
 
