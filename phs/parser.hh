@@ -16,7 +16,7 @@ namespace phs {
 
   class Parser
   {
-    Lexer* lex;
+    Lexer& lex;
 
     struct Op {
       int prec;
@@ -35,84 +35,84 @@ namespace phs {
     // forwarded to the lexer
     inline void skip(int = 1);
     inline void push(Token*);
-    inline Token* peek(int = 1);
-    inline Token* next();
+    inline const TokenPtr& peek(int = 1);
+    inline TokenPtr next();
 
   public:
     Parser();
     ~Parser();
 
-    ast::Unit* parse(Lexer&);
-    ast::Unit* parse(Source&);
+    ast::UnitPtr parse(Lexer&);
+    ast::UnitPtr parse(Source&);
 
     // parse methods
 
-    ast::Unit* parse_unit();
+    ast::UnitPtr parse_unit();
 
-    ast::Module* parse_module();
-    ast::Content* parse_content();
-    ast::Module* parse_module_nst();
+    ast::ModulePtr parse_module();
+    ast::ContentPtr parse_content();
+    ast::ModulePtr parse_module_nst();
 
-    ast::UseDecl* parse_use_decl(ast::Mods*);
-    ast::UseItem* parse_use_decl_item();
+    ast::UseDeclPtr parse_use_decl(const ast::ModsPtr&);
+    ast::UseItemPtr parse_use_decl_item();
 
-    ast::ClassDecl* parse_class_decl(ast::Mods*);
-    ast::TraitDecl* parse_trait_decl(ast::Mods*);
-    ast::IfaceDecl* parse_iface_decl(ast::Mods*);
+    ast::ClassDeclPtr parse_class_decl(const ast::ModsPtr&);
+    ast::TraitDeclPtr parse_trait_decl(const ast::ModsPtr&);
+    ast::IfaceDeclPtr parse_iface_decl(const ast::ModsPtr&);
 
-    ast::FnDecl* parse_fn_decl(ast::Mods*);
-    ast::VarDecl* parse_var_decl(ast::Mods*);
-    ast::VarDecl* parse_var_decl_no_semi(ast::Mods*, bool);
-    ast::VarList* parse_var_list_decl(Loc*, ast::Mods*, bool);
-    ast::VarItem* parse_var_item(bool);
+    ast::FnDeclPtr parse_fn_decl(const ast::ModsPtr&);
+    ast::VarDeclPtr parse_var_decl(const ast::ModsPtr&);
+    ast::VarDeclPtr parse_var_decl_no_semi(const ast::ModsPtr&, bool);
+    ast::VarListPtr parse_var_list_decl(const LocPtr&, const ast::ModsPtr&, bool);
+    ast::VarItemPtr parse_var_item(bool);
 
-    ast::Stmt* parse_stmt();
-    ast::Block* parse_block();
+    ast::StmtPtr parse_stmt();
+    ast::BlockPtr parse_block();
 
-    ast::Node* parse_comp();
-    ast::Node* parse_label_or_stmt();
+    ast::NodePtr parse_comp();
+    ast::NodePtr parse_label_or_stmt();
 
-    ast::DoStmt* parse_do_stmt();
-    ast::IfStmt* parse_if_stmt();
+    ast::DoStmtPtr parse_do_stmt();
+    ast::IfStmtPtr parse_if_stmt();
 
-    ast::ForStmt* parse_for_stmt();
-    ast::ForInStmt* parse_for_in_stmt();
+    ast::ForStmtPtr parse_for_stmt();
+    ast::ForInStmtPtr parse_for_in_stmt();
     
-    ast::TryStmt* parse_try_stmt();
-    ast::GotoStmt* parse_goto_stmt();
-    ast::TestStmt* parse_test_stmt();
-    ast::BreakStmt* parse_break_stmt();
-    ast::ContinueStmt* parse_continue_stmt();
-    ast::ThrowStmt* parse_throw_stmt();
-    ast::WhileStmt* parse_while_stmt();
-    ast::AssertStmt* parse_assert_stmt();
+    ast::TryStmtPtr parse_try_stmt();
+    ast::GotoStmtPtr parse_goto_stmt();
+    ast::TestStmtPtr parse_test_stmt();
+    ast::BreakStmtPtr parse_break_stmt();
+    ast::ContinueStmtPtr parse_continue_stmt();
+    ast::ThrowStmtPtr parse_throw_stmt();
+    ast::WhileStmtPtr parse_while_stmt();
+    ast::AssertStmtPtr parse_assert_stmt();
 
-    ast::SwitchStmt* parse_switch_stmt();
-    ast::CaseItem* parse_switch_case();
+    ast::SwitchStmtPtr parse_switch_stmt();
+    ast::CaseItemPtr parse_switch_case();
 
-    ast::ReturnStmt* parse_return_stmt();
-    ast::ExprStmt* parse_expr_stmt();
+    ast::ReturnStmtPtr parse_return_stmt();
+    ast::ExprStmtPtr parse_expr_stmt();
 
-    ast::Expr* parse_expr(bool, bool);
-    ast::Expr* parse_expr_ops(int, bool, bool);
-    ast::Expr* parse_primary_expr(bool, bool);
-    ast::Expr* parse_member_expr(bool, bool);
-    ast::Expr* parse_expr_atom(bool, bool);
+    ast::ExprPtr parse_expr(bool, bool);
+    ast::ExprPtr parse_expr_ops(int, bool, bool);
+    ast::ExprPtr parse_primary_expr(bool, bool);
+    ast::ExprPtr parse_member_expr(bool, bool);
+    ast::ExprPtr parse_expr_atom(bool, bool);
 
-    ast::RxpLit* parse_rxp_lit();
-    ast::StrLit* parse_str_lit();
-    ast::ArrLit* parse_arr_lit();
-    ast::TupLit* parse_tup_lit();
-    ast::ObjLit* parse_obj_lit();
-    ast::ObjPair* parse_obj_pair();
+    ast::RxpLitPtr parse_rxp_lit();
+    ast::StrLitPtr parse_str_lit();
+    ast::ArrLitPtr parse_arr_lit();
+    ast::TupLitPtr parse_tup_lit();
+    ast::ObjLitPtr parse_obj_lit();
+    ast::ObjPairPtr parse_obj_pair();
 
-    ast::FnExpr* parse_fn_expr(bool);
-    ast::NewExpr* parse_new_expr(bool);
-    ast::DelExpr* parse_del_expr(bool);
-    ast::YieldExpr* parse_yield_expr(bool);
+    ast::FnExprPtr parse_fn_expr(bool);
+    ast::NewExprPtr parse_new_expr(bool);
+    ast::DelExprPtr parse_del_expr(bool);
+    ast::YieldExprPtr parse_yield_expr(bool);
 
-    ast::Name* parse_name();
-    ast::Ident* parse_ident(bool);
+    ast::NamePtr parse_name();
+    ast::IdentPtr parse_ident(bool);
   };
 
 }

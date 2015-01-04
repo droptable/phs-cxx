@@ -12,29 +12,10 @@ namespace phs {
   {}
 
   // lexer shortcuts
-  inline void Parser::skip(int n = 1) 
-  { 
-    // no magic here
-    lex->skip(n); 
-  }
-
-  inline void Parser::push(Token* tok) 
-  { 
-    // no magic here
-    lex->push(tok); 
-  }
-
-  inline Token* Parser::peek(int n = 1) 
-  { 
-    // no magic here
-    return lex->peek(n); 
-  }
-
-  inline Token* Parser::next() 
-  { 
-    // no magic here 
-    return lex->next(); 
-  }
+  inline void Parser::skip(int n = 1) { lex.skip(n); }
+  inline void Parser::push(Token* tok) { lex.push(tok); }
+  inline const TokenPtr& Parser::peek(int n = 1) { return lex.peek(n); }
+  inline TokenPtr Parser::next() { return lex.next(); }
 
   void Parser::expect(Token::Type type)
   {
@@ -56,19 +37,19 @@ namespace phs {
 
   void Parser::consume_semis()
   {
-    while (peek()->type == T_SEMI)
+    while (peek()->type == ';')
       skip();
   }
 
   // entrypoint #1 
-  ast::Unit* Parser::parse(Lexer& lex_)
+  ast::UnitPtr Parser::parse(Lexer& lex_)
   {
     lex = &lex_;
     return parse_unit();
   }
 
   // entrypoint #2
-  ast::Unit* Parser::parse(Source& src)
+  ast::UnitPtr Parser::parse(Source& src)
   {
     lex = new Lexer(src);
     auto unit = parse_unit();

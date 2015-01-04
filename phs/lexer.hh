@@ -11,6 +11,8 @@
 
 namespace phs {
 
+  using LocPtr = std::shared_ptr<Loc>;
+  using SpanPtr = std::shared_ptr<Span>;
   using TokenPtr = std::shared_ptr<Token>;
 
   struct Loc 
@@ -130,7 +132,7 @@ namespace phs {
     void skip(int = 1);
     void push(Token*);
 
-    TokenPtr peek(int = 1);
+    const TokenPtr& peek(int = 1);
     TokenPtr next();
   };
 

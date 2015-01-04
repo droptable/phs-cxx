@@ -45,13 +45,13 @@ namespace phs {
     queue.push_back(TokenPtr(tok));
   }
 
-  TokenPtr Lexer::peek(int n = 1)
+  const TokenPtr& Lexer::peek(int n = 1)
   {
     assert(n > 0);
 
     while (queue.size() < n)
       if (scan(true))
-        queue.push_back(TokenPtr(tok));
+        queue.push_back(TokenPtr(std::move(tok)));
       else {
         assert(eof != nullptr);
         return eof;
