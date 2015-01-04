@@ -2,7 +2,6 @@
 #define _PHS_SOURCE_HH
 
 #include <iostream>
-#include <fstream>
 #include <memory>
 
 #include "ast.hh"
@@ -10,20 +9,21 @@
 
 namespace phs {
 
+  template<class stream_type=std::istream>
   struct Source
   {
     private:
-      std::istream stream; // keeps filebuf
+      stream_type stream;
 
     public:
       std::shared_ptr<ast::Unit> unit;
 
     public:
-      Source(std::istream&& stream);
+      Source(stream_type&& stream);
 
     public:
       std::string& get_alias();
-      std::istream& get_stream();
+      stream_type& get_stream();
   } /* class Source */;
 }
 
