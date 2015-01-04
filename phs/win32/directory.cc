@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-PathList& Directory::get_files(const std::string& path)
+PathList Directory::get_files(const std::string& path)
 {
   PathList files;
 

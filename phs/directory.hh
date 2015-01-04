@@ -18,7 +18,7 @@ class Directory {
   const char PathSeparator = '/';
 #endif
 
-  static PathList& get_files(const std::string& path);
+  static PathList get_files(const std::string& path);
 
 } /* class Directory */;
 
