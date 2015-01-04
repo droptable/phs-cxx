@@ -2,29 +2,50 @@
 #define _PHS_SOURCE_HH
 
 #include <iostream>
+#include <fstream>
 #include <memory>
+#include <list>
 
 #include "ast.hh"
 #include "types.hh"
 
 namespace phs {
 
-  template<class stream_type=std::istream>
+  using SourceList = std::list<Source>;
+
   struct Source
   {
+    public:
+      enum Type {
+        IsText,
+        IsFile
+      };
+
     private:
-      stream_type stream;
+      std::istream stream; // keeps filebuf
+      Type type;
 
     public:
       std::shared_ptr<ast::Unit> unit;
 
     public:
-      Source(stream_type&& stream);
+      Source(const std::string& alias, std::istream&& stream, Type type);
 
     public:
       std::string& get_alias();
-      stream_type& get_stream();
+      std::istream& get_stream();
   } /* class Source */;
+
+  struct SourceFactory {
+    public:
+      static SourceList& from_directory(const std::string& path);
+
+      static Source& from_file(std::string& path);
+
+      static Source& from_text(std::string& text);
+      static Source& from_text(std::istream& stream);
+  } /* class SourceIterator */;
+
 }
 
 #endif
