@@ -1,6 +1,8 @@
 #ifndef _PHS_PARSER_HH
 #define _PHS_PARSER_HH
 
+#include "setup.hh"
+
 #include <list>
 
 #include "ast.hh"
@@ -8,6 +10,9 @@
 #include "source.hh"
 
 namespace phs {
+
+  class ParseError : public std::exception {};
+  class SyntaxError : public ParseError {};
 
   class Parser
   {
@@ -22,6 +27,16 @@ namespace phs {
         OP_ASSOC_RIGHT
       } assoc;
     };
+    
+    void expect(Token::Type) throw(ParseError);
+    bool consume(Token::Type);
+    void consume_semis();
+
+    // forwarded to the lexer
+    inline void skip(int = 1);
+    inline void push(Token*);
+    inline Token* peek(int = 1);
+    inline Token* next();
 
   public:
     Parser();
@@ -38,17 +53,17 @@ namespace phs {
     ast::Content* parse_content();
     ast::Module* parse_module_nst();
 
-    ast::UseDecl* parse_use_decl(ast::mods*);
+    ast::UseDecl* parse_use_decl(ast::Mods*);
     ast::UseItem* parse_use_decl_item();
 
-    ast::ClassDecl* parse_class_decl(ast::mods*);
-    ast::TraitDecl* parse_trait_decl(ast::mods*);
-    ast::IfaceDecl* parse_iface_decl(ast::mods*);
+    ast::ClassDecl* parse_class_decl(ast::Mods*);
+    ast::TraitDecl* parse_trait_decl(ast::Mods*);
+    ast::IfaceDecl* parse_iface_decl(ast::Mods*);
 
-    ast::FnDecl* parse_fn_decl(ast::mods*);
-    ast::VarDecl* parse_var_decl(ast::mods*);
-    ast::VarDecl* parse_var_decl_no_semi(ast::mods*, bool);
-    ast::VarList* parse_var_list_decl(Loc*, ast::mods*, bool);
+    ast::FnDecl* parse_fn_decl(ast::Mods*);
+    ast::VarDecl* parse_var_decl(ast::Mods*);
+    ast::VarDecl* parse_var_decl_no_semi(ast::Mods*, bool);
+    ast::VarList* parse_var_list_decl(Loc*, ast::Mods*, bool);
     ast::VarItem* parse_var_item(bool);
 
     ast::Stmt* parse_stmt();

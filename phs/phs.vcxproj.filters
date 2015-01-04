@@ -27,5 +27,13 @@
     <ClInclude Include="source.hh">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="setup.hh">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="parser.cc">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

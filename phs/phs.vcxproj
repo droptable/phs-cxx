@@ -81,7 +81,11 @@
     <ClInclude Include="ast.hh" />
     <ClInclude Include="lexer.hh" />
     <ClInclude Include="parser.hh" />
+    <ClInclude Include="setup.hh" />
     <ClInclude Include="source.hh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="parser.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

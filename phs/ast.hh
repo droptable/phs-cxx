@@ -1,6 +1,8 @@
 #ifndef _PHS_AST_HH
 #define _PHS_AST_HH
 
+#include "setup.hh"
+
 #include <vector>
 
 namespace phs {
@@ -12,7 +14,7 @@ namespace phs {
   namespace ast {
 
     // modifier list
-    typedef std::vector<Token*> mods;
+    using Mods = std::vector<Token*>;
 
     // node-kinds
     enum class Kind 
