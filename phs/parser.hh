@@ -1,10 +1,9 @@
 #ifndef _PHS_PARSER_HH
 #define _PHS_PARSER_HH
 
-#include "setup.hh"
-
 #include <list>
 
+#include "types.hh"
 #include "ast.hh"
 #include "lexer.hh"
 #include "source.hh"

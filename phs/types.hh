@@ -1,5 +1,5 @@
-#ifndef _PHS_SETUP_HH
-#define _PHS_SETUP_HH
+#ifndef _PHS_TYPES_HH
+#define _PHS_TYPES_HH
 
 #include <cstdint>
 

@@ -1,11 +1,10 @@
 #ifndef _PHS_AST_HH
 #define _PHS_AST_HH
 
-#include "setup.hh"
-
 #include <vector>
 #include <memory>
 
+#include "types.hh"
 #include "lexer.hh"
 
 namespace phs {
@@ -41,10 +40,10 @@ namespace phs {
 
     struct Node 
     {
-      const LocPtr& loc;
+      const LocPtr loc;
       const Kind kind;
 
-      Node(const LocPtr&, const Kind);
+      Node(const LocPtr, const Kind);
     };
 
     // basics

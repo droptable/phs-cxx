@@ -1,34 +1,38 @@
 #ifndef _PHS_SOURCE_HH
 #define _PHS_SOURCE_HH
 
-#include "setup.hh"
-
+#include <set>
 #include <iostream>
 #include <fstream>
+#include <string>
 
+#include "types.hh"
 #include "ast.hh"
 
 namespace phs {
 
+  using SourcePtr = std::shared_ptr<Source>;
+  using SourceSet = std::set<SourcePtr>;
+
   struct Source
   {
-    // parsed unit for this source
-    ast::Unit* unit;
+    enum Type { SRC_TEXT, SRC_FILE };
 
-    virtual std::string& get_alias();
-    virtual std::istream& get_stream();
-  };
+    Source(const std::string&, std::istream&, const Type);
+    ~Source();
 
-  class FileSource : public Source
-  {
-    std::fstream& fp;
-
-  public:
-    FileSource(const char*);
-    ~FileSource();
-
-    std::string& get_alias();
+    const Type& get_type();
+    std::string& get_name();
     std::istream& get_stream();
+
+    static SourceSet from_dir(const std::string&);
+    static SourcePtr from_text(const std::string&, std::istream&);
+    static SourcePtr from_file(const std::string&, std::istream&);
+
+  private:
+    std::string& name;
+    std::istream& stream;
+    const Type type;
   };
 
 }
