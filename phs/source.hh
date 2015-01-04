@@ -22,6 +22,7 @@ namespace phs {
       };
 
     private:
+      std::string alias;
       std::istream stream; // keeps filebuf
       Type type;
 
@@ -29,11 +30,12 @@ namespace phs {
       std::shared_ptr<ast::Unit> unit;
 
     public:
-      Source(const std::string& alias, std::istream&& stream, Type type);
+      Source(const std::string& alias, std::istream& stream, Type type);
 
     public:
       std::string& get_alias();
       std::istream& get_stream();
+      type get_type();
   } /* class Source */;
 
   struct SourceFactory {
