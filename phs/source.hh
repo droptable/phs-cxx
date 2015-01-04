@@ -1,36 +1,30 @@
 #ifndef _PHS_SOURCE_HH
 #define _PHS_SOURCE_HH
 
-#include "setup.hh"
-
 #include <iostream>
 #include <fstream>
+#include <memory>
 
 #include "ast.hh"
+#include "types.hh"
 
 namespace phs {
 
   struct Source
   {
-    // parsed unit for this source
-    ast::Unit* unit;
+    private:
+      std::istream stream; // keeps filebuf
 
-    virtual std::string& get_alias();
-    virtual std::istream& get_stream();
-  };
+    public:
+      std::shared_ptr<ast::Unit> unit;
 
-  class FileSource : public Source
-  {
-    std::fstream& fp;
+    public:
+      Source(std::istream&& stream);
 
-  public:
-    FileSource(const char*);
-    ~FileSource();
-
-    std::string& get_alias();
-    std::istream& get_stream();
-  };
-
+    public:
+      std::string& get_alias();
+      std::istream& get_stream();
+  } /* class Source */;
 }
 
 #endif

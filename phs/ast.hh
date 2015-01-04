@@ -1,9 +1,10 @@
 #ifndef _PHS_AST_HH
 #define _PHS_AST_HH
 
-#include "setup.hh"
-
 #include <vector>
+
+#include "types.hh"
+#include "lexer.hh"
 
 namespace phs {
 
@@ -14,10 +15,10 @@ namespace phs {
   namespace ast {
 
     // modifier list
-    using Mods = std::vector<Token*>;
+    using Mods = std::vector<TokenPtr>;
 
     // node-kinds
-    enum class Kind 
+    enum class Kind
     {
       UNIT, MODULE, CONTENT,
       DECL, USE_DECL, USE_ITEM,
@@ -39,19 +40,19 @@ namespace phs {
       NAME, IDENT
     };
 
-    struct Node 
+    struct Node
     {
       const Loc* loc;
       const Kind kind;
 
-      Node(const Loc*, const Kind);
+      Node(const Loc&, const Kind);
     };
 
     // basics
     struct Unit : public Node {};
     struct Module : public Node {};
     struct Content : public Node {};
-    
+
     // declarations
     struct Decl : public Node {};
 
@@ -61,15 +62,15 @@ namespace phs {
     struct ClassDecl : public Decl {};
     struct TraitDecl : public Decl {};
     struct IfaceDecl : public Decl {};
-    
+
     struct FnDecl : public Decl {};
     struct VarDecl : public Decl {};
     struct VarList : public Decl {};
     struct VarItem : public Node {};
-    
+
     // statements
     struct Stmt : public Node {};
-   
+
     struct Block : public Stmt {};
     struct DoStmt : public Stmt {};
     struct IfStmt : public Stmt {};
@@ -94,7 +95,7 @@ namespace phs {
 
     // expressions
     struct Expr : public Node {};
-    
+
     struct UnaryExpr : public Expr {};
     struct BinaryExpr : public Expr {};
     struct CondExpr : public Expr {};
