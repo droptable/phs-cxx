@@ -3,6 +3,8 @@
 
 #ifdef __WIN32__
 # include "win32/directory.hh"
+#else
+# error "not implemented yet"
 #endif
 
 #endif
