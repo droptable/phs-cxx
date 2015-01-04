@@ -44,7 +44,7 @@ namespace phs {
 
       static Source& from_text(std::string& text);
       static Source& from_text(std::istream& stream);
-  } /* class SourceIterator */;
+  } /* class SourceFactory */;
 
 }
 
