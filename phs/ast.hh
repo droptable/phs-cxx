@@ -5,6 +5,7 @@
 #include <memory>
 
 #include "types.hh"
+#include "token.hh"
 #include "lexer.hh"
 
 namespace phs {

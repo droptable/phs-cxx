@@ -10,17 +10,12 @@
 
 namespace phs {
 
-  class Token;
+  struct Loc;
+  using LocPtr = std::shared_ptr<Loc>;
+
+  struct Token;
   using TokenPtr = std::shared_ptr<Token>;
   using TokenUPtr = std::unique_ptr<Token>;
-
-  struct Loc
-  {
-    const std::string& file;
-    const Span& span;
-
-    Loc(const std::string&, const Span&);
-  };
 
   struct Span
   {
@@ -30,13 +25,19 @@ namespace phs {
     Span(const uint, const uint);
   };
 
-  enum TokenType;
+  struct Loc
+  {
+    const std::string& file;
+    const Span& span;
+
+    Loc(const std::string&, const Span&);
+  };
+
+  enum TokenType: int;
 
   struct Token
   {
-    using BaseType = std::underlying_type<TokenType>;
-    /*using Type = int; // we're using both ints and chars as type,
-    // a special enum would be too strict.*/
+    using BaseType = std::underlying_type<TokenType>::type;
     const BaseType type;
 
     union {

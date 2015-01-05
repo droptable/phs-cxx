@@ -2,15 +2,15 @@
 
 namespace phs {
 
-  Loc::Loc(const std::string& file_, const Span& span_)
-    : file(file_), span(span_)
-  {}
-
   Span::Span(const uint line_, const uint coln_)
     : line(line_), coln(coln_)
   {}
 
-  Token::Token(const Token::BaseType type)
+  Loc::Loc(const std::string& file_, const Span& span_)
+    : file(file_), span(span_)
+  {}
+
+  Token::Token(const BaseType type)
     : type(type)
   {
     this->lit.str_lit.data = nullptr;

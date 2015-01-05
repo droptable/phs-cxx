@@ -2,6 +2,7 @@
 #define _PHS_PARSER_HH
 
 #include <list>
+#include <exception>
 
 #include "types.hh"
 #include "ast.hh"
@@ -16,9 +17,7 @@ namespace phs {
 
   class Parser
   {
-    LexerUPtr lex;  // Needs to be a ptr since it gets initialized in
-                    // Parser::parse() only, but'll be created
-                    // in Parser::Parser() without Source.
+    Lexer& lex;
 
     struct Op {
       int prec;

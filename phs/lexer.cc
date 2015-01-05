@@ -1,6 +1,5 @@
 #include <cassert>
 
-#include "token.hh"
 #include "lexer.hh"
 
 inline TokenUPtr& generate_unique(const TokenPtr& token) {

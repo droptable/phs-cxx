@@ -43,16 +43,15 @@ namespace phs {
   // entrypoint #1
   ast::UnitPtr Parser::parse(Lexer& lex_)
   {
-    lex.reset(new Lexer{lex_}); // default copy-constructor
+    lex = lex_;
     return parse_unit();
   }
 
   // entrypoint #2
   ast::UnitPtr Parser::parse(Source& src)
   {
-    lex.reset(new Lexer{src});
-    auto unit = parse_unit();
-    return unit;
+    lex = Lexer{src};
+    return parse_unit();
   }
 
 } /* ns phs */;
