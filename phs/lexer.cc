@@ -10,7 +10,7 @@ inline TokenUPtr& generate_unique(const TokenPtr& token) {
   return unique;
 }
 
-std::map<std::string, Token::Type> Keywords {
+const std::map<std::string, Token::Type> Keywords {
   {"true", T_TRUE}, {"false", T_FALSE}, {"null", T_NULL},
   {"as", T_AS}, {"fn", T_FN}, {"let", T_LET},
   {"use", T_USE}, {"del", T_DEL}, {"new", T_NEW},
@@ -78,9 +78,9 @@ namespace phs {
 
   TokenUPtr Lexer::peek(int i = 1)
   {
-    assert(n > 0);
+    assert(i > 0);
 
-    while (queue.size() < n)
+    while (queue.size() < i)
       if (scan(true))
         queue.push_back(TokenPtr(tok));
       else {
@@ -88,7 +88,7 @@ namespace phs {
         return generate_unique(eof);
       }
 
-    return generate_unique(queue[n - 1]);
+    return generate_unique(queue[i - 1]);
   }
 
   TokenPtr Lexer::next()

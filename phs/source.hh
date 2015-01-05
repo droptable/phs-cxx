@@ -24,28 +24,28 @@ namespace phs {
     private:
       std::string alias;
       std::istream stream; // keeps filebuf
-      Type type;
+      const Type type;
 
     public:
-      std::shared_ptr<ast::Unit> unit;
+      ast::UnitPtr unit;
 
     public:
-      Source(const std::string& alias, std::istream& stream, Type type);
+      Source(const std::string& alias, const std::istream& stream, const Type type);
 
     public:
-      std::string& get_alias();
-      std::istream& get_stream();
-      type get_type();
+      const std::string& get_alias();
+      const std::istream& get_stream();
+      const Type get_type();
   } /* class Source */;
 
   struct SourceFactory {
     public:
-      static SourceList& from_directory(const std::string& path);
+      static SourceList from_directory(const std::string& path);
 
-      static Source& from_file(std::string& path);
+      static Source from_file(const std::string& path);
 
-      static Source& from_text(std::string& text);
-      static Source& from_text(std::istream& stream);
+      static Source from_text(const std::string& text);
+      static Source from_text(const std::istream& stream);
   } /* class SourceFactory */;
 
 }

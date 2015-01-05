@@ -43,9 +43,9 @@ namespace phs {
     Lexer(Source&);
     ~Lexer();
 
-    void skip(int n = 1);
+    void skip(int = 1);
 
-    TokenUPtr& peek(int i = 1);
+    TokenUPtr& peek(int = 1);
     TokenPtr next();
   };
 

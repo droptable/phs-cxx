@@ -10,17 +10,20 @@
 #include <list>
 #include <string>
 
-using PathList = std::list<std::string>;
+namespace phs {
+  using PathList = std::list<std::string>;
 
+  class Directory {
+    public:
 #ifdef OS_WINDOWS
-const char PathSeparator = '\\';
+      const char Separator = '\\';
 #elif defined(OS_NIX)
-const char PathSeparator = '/';
+      const char Separator = '/';
 #endif
 
-class Directory {
-  public:
-    static PathList get_files(const std::string& path);
-} /* class Directory */;
+    public:
+      static PathList get_files(const std::string& path);
+  } /* class Directory */;
+} /* ns phs */;
 
 #endif
