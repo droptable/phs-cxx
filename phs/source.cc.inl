@@ -52,7 +52,7 @@ namespace phs {
   template<class StreamBuffer>
   Source<StreamBuffer> Source<StreamBuffer>::from_text(const std::string& text)
   {
-    return TextSource{"text", new StreamBuffer{text}, ST_TEXT};
+    return Source<StreamBuffer>{"text", new StreamBuffer{text}, ST_TEXT};
   }
 
 } /* ns phs */;
