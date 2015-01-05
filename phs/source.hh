@@ -13,7 +13,7 @@ namespace phs {
 
   using SourceList = std::list<Source>;
 
-  struct Source
+  class Source
   {
     public:
       enum Type {
@@ -38,7 +38,7 @@ namespace phs {
       const Type get_type();
   } /* class Source */;
 
-  struct SourceFactory {
+  class SourceFactory {
     public:
       static SourceList from_directory(const std::string& path);
 

@@ -4,7 +4,7 @@
 #include "parser.hh"
 
 namespace phs {
-  
+
   Parser::Parser()
   {}
 
@@ -12,39 +12,19 @@ namespace phs {
   {}
 
   // lexer shortcuts
-  inline void Parser::skip(int n = 1) 
-  { 
-    // no magic here
-    lex->skip(n); 
-  }
+  inline void Parser::skip(int n = 1) { lex.skip(n); }
+  inline const TokenUPtr& Parser::peek(int i = 1) { return lex.peek(i); }
+  inline TokenPtr Parser::next() { return lex.next(); }
 
-  inline void Parser::push(Token* tok) 
-  { 
-    // no magic here
-    lex->push(tok); 
-  }
-
-  inline Token* Parser::peek(int n = 1) 
-  { 
-    // no magic here
-    return lex->peek(n); 
-  }
-
-  inline Token* Parser::next() 
-  { 
-    // no magic here 
-    return lex->next(); 
-  }
-
-  void Parser::expect(Token::Type type)
+  void Parser::expect(const Token::BaseType type)
   {
     if (peek()->type != type)
       throw SyntaxError();
 
-    skip();
-  }
+      skip();
+    }
 
-  bool Parser::consume(Token::Type type)
+  bool Parser::consume(const Token::BaseType type)
   {
     if (peek()->type == type) {
       skip();
@@ -56,25 +36,23 @@ namespace phs {
 
   void Parser::consume_semis()
   {
-    while (peek()->type == T_SEMI)
+    while (peek()->type == ';')
       skip();
-  }
+    }
 
-  // entrypoint #1 
-  ast::Unit* Parser::parse(Lexer& lex_)
+  // entrypoint #1
+  ast::UnitPtr Parser::parse(Lexer& lex_)
   {
-    lex = &lex_;
+    lex.reset(new Lexer{lex_}); // default copy-constructor
     return parse_unit();
   }
 
   // entrypoint #2
-  ast::Unit* Parser::parse(Source& src)
+  ast::UnitPtr Parser::parse(Source& src)
   {
-    lex = new Lexer(src);
+    lex.reset(new Lexer{src});
     auto unit = parse_unit();
-    delete lex;
     return unit;
   }
 
-
-}
+} /* ns phs */;

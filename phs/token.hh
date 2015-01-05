@@ -36,8 +36,8 @@ namespace phs {
   {
     using BaseType = std::underlying_type<TokenType>;
     /*using Type = int; // we're using both ints and chars as type,
-    // a special enum would be too strict.
-    const Type type;*/
+    // a special enum would be too strict.*/
+    const BaseType type;
 
     union {
       int32_t i32_lit;
@@ -99,7 +99,7 @@ namespace phs {
     T_GTE, T_LTE, T_SL, T_SR,
     T_REST, T_INC, T_DEC, T_POW
   };
-  
+
 } /* ns phs */;
 
 #endif /* _PHS_TOKEN_HH */

@@ -12,6 +12,8 @@
 
 namespace phs {
 
+  using LexerUPtr = std::unique_ptr<Lexer>;
+
   class Lexer
   {
     Source& src;
