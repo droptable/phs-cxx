@@ -18,10 +18,10 @@ namespace phs {
   struct Source
   {
     enum Type { 
-      GENERIC, // stdin/out or somewhere else managed
-      MEMORY,  // from memory [TBI]
-      TEXT,    // from a string
-      FILE     // from a file
+      SRC_GENERIC, // stdin/out or somewhere else managed
+      SRC_MEMORY,  // from memory [TBI]
+      SRC_TEXT,    // from a string
+      SRC_FILE     // from a file
     };
 
     Source(const Type, const std::string&);
@@ -71,7 +71,7 @@ namespace phs {
   struct FileSource : public Source
   {
     // note: NOT the same as 
-    // `Source(Source::FILE, "path", open("path"))`
+    // `Source(Source::SRC_FILE, "path", open("path"))`
     // the input-stream gets managed by the source
     FileSource(const std::string&);
     virtual ~FileSource();
