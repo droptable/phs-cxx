@@ -18,10 +18,10 @@ namespace phs {
   struct Source
   {
     enum Type { 
-      SRC_GENERIC, // stdin/out or somewhere else managed
-      SRC_MEMORY,  // from memory [TBI]
-      SRC_TEXT,    // from a string
-      SRC_FILE     // from a file
+      TYPE_GENERIC, // stdin/out or somewhere else managed
+      TYPE_MEMORY,  // from memory [TBI]
+      TYPE_TEXT,    // from a string
+      TYPE_FILE     // from a file
     };
 
     Source(const Type, const std::string&);

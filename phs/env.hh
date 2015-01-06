@@ -3,16 +3,26 @@
 
 #if defined(_WIN32)
 #define OS_WINDOWS
+#include <windows.h>
 
-#elif defined(__gnu_linux__) || defined(__linux__)
+#else
+#include <unistd.h>
+
+#ifdef _POSIX_VERSION
+#define OS_POSIX
+#endif
+
+#if defined(__gnu_linux__) || defined(__linux__)
 #define OS_LINUX
 
+/* @TODO bsd */
 #elif defined(__APPLE__) || defined(__MACH__)
-#define OS_APPLE
+#define OS_UNIX
 
 #else
 #define OS_UNKNOWN
+#endif /* defined(__gnu_linux__) || defined(__linux__) */
 
-#endif
+#endif /* defined(_WIN32) */
 
 #endif

@@ -12,10 +12,20 @@ namespace phs {
   {}
 
   // lexer shortcuts
-  inline void Parser::skip(int n = 1) { lex.skip(n); }
-  inline void Parser::push(Token* tok) { lex.push(tok); }
-  inline const TokenPtr& Parser::peek(int n = 1) { return lex.peek(n); }
-  inline TokenPtr Parser::next() { return lex.next(); }
+  inline void Parser::skip(int n = 1) 
+  { 
+    lex.skip(n); 
+  }
+
+  inline const TokenPtr& Parser::peek(int n = 1) 
+  { 
+    return lex.peek(n); 
+  }
+
+  inline TokenPtr Parser::next()
+  { 
+    return lex.next(); 
+  }
 
   void Parser::expect(Token::Type type)
   {
