@@ -3,27 +3,6 @@
 #include "lexer.hh"
 
 namespace phs {
-  
-  Loc::Loc(const std::string& file_, const Span& span_)
-    : file(file_), span(span_)
-  {}
-
-  Span::Span(const uint line_, const uint coln_)
-    : line(line_), coln(coln_)
-  {}
-
-  Token::Token(const Type type_)
-    : type(type_)
-  {
-    lit.str_lit.data = nullptr;
-  }
-
-  Token::~Token()
-  {
-    if ((type == T_STR_LIT || type == T_RXP_LIT) && 
-        lit.str_lit.data != nullptr)
-      delete[] lit.str_lit.data;
-  }
 
   Lexer::Lexer(Source& src_)
     : src(src_)
@@ -38,11 +17,6 @@ namespace phs {
       queue.pop_front();
     else
       scan(false);
-  }
-
-  void Lexer::push(Token* tok)
-  {
-    queue.push_back(TokenPtr(tok));
   }
 
   const TokenPtr& Lexer::peek(int n = 1)
